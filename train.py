@@ -31,6 +31,7 @@ file_list = os.listdir(settings.wav_folder)
 #TODO: check that there are only wave files
 waveforms = load_waves(settings, file_list)
 mfccs, max_T, all_lengths = extract_mfccs(waveforms, settings) #TODO: what other features? intensity? HNR?
+# TODO: we could work with mels instead of mfccs
 # print mfccs.shape # (number of files, max_T, 12 coeff)
 alignments = load_labels(settings, file_list)
 targets = upsample_alignment(alignments, max_T, settings)
@@ -96,12 +97,13 @@ print (x_train.shape, y_train.shape, x_val.shape, y_val.shape, x_test.shape, y_t
 # Hyperparameters
 batch_size = settings.batch_size
 dropout_rate = settings.dropout_rate
+learning_rate = settings.learning_rate
 n_feats = x_train.shape[1]
 epochs = settings.epochs
 nn_type = settings.nn_type # feed_forward only one supported right now
 
 # build model
-model = build_feedforward(n_feats, dropout_rate)
+model = build_feedforward(n_feats, dropout_rate, learning_rate)
 # train model
 history = model.fit(x_train, y_train, validation_data=(x_val, y_val), epochs=epochs, verbose=2, batch_size=batch_size)
 # evaluate model

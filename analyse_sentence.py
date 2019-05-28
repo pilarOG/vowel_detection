@@ -44,5 +44,5 @@ for sentence in range(0, x_test.shape[0]):
     sample_t = 0
     for frame in predictions:
         print (sample_t, frame)
-        time = float(settings.sample_frame_length-settings.frame_step) / float(settings.samplerate)
+        time = float(settings.frame_length-settings.frame_step) / float(settings.samplerate)
         sample_t += time
