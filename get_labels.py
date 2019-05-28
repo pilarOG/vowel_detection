@@ -52,6 +52,6 @@ def upsample_alignment(alignments, max_T, settings, mode='htk'):
         label_targets.append(padded_targets)
         label_lengths.append(len(padded_targets))
 
-    print 'label sizes', label_windows
+    #print 'label sizes', label_windows
     #print 'target sizes', label_lengths
     return label_targets

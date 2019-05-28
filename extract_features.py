@@ -3,7 +3,7 @@ import numpy as np
 
 # Run this step first and save features so that we don't need do to extraction every time we train
 
-def extract_mfccs(waveforms, settings):
+def extract_mfccs(waveforms, settings, mode=None):
     all_mfccs = []
     padded_mfccs = []
     all_lengths = []
@@ -30,4 +30,4 @@ def extract_mfccs(waveforms, settings):
     max_T = max(all_lengths)+2 # just in case
     # Do padding given max_T
     padded_mfccs = [np.pad(np.array(m), ((0, max_T-np.array(m).shape[0]), (0, 0)), 'constant') for m in all_mfccs]
-    return padded_mfccs, max_T
+    return padded_mfccs, max_T, all_lengths
